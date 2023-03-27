@@ -6,22 +6,35 @@ public class MainClass
 {
     public static void Main()
     {
-        for(int i = 1; i <= 10; i++)
+        for(int i = 1; i <= 80; i++)
         {
             var n = 10*i;
             var matrix = GenerateMatrix(n);
             int[,] matrixCopy = matrix.Clone() as int[,];
-/*
-            Console.WriteLine("\n");
-            PrintMatrix(matrix);
-            Console.WriteLine("\n");*/
 
+            DateTime start = DateTime.Now;
+            DateTime end = DateTime.Now;
+            //TimeSpan ts = (end - start);
+            Console.WriteLine("\n-----------------------------------------");
+
+            //Weighted
+            start = DateTime.Now;
             var result2ApproximatedWeighteed = VertexCover2ApproximatedWeightedEdges(matrix);
-            Console.WriteLine("\nVertex Cover with weighted edges: ");
-            PrintList(result2ApproximatedWeighteed);
-            Console.WriteLine("\nVertex Cover without weigthed edges: ");
+            end = DateTime.Now;
+            TimeSpan tsWeight = (end - start);
+
+
+            //Not Weighted
+            start = DateTime.Now;
             var result2Approximated = VertexCover2Approximated(matrixCopy);
-            PrintList(result2Approximated);
+            end = DateTime.Now;
+            TimeSpan tsNoWeight = (end - start);
+
+
+            Console.Write(n + ";" + result2ApproximatedWeighteed.Count + ";");
+            Console.WriteLine(result2Approximated.Count+";");
+            Console.Write(tsWeight.TotalMilliseconds + ";");
+            Console.Write(tsNoWeight.TotalMilliseconds + ";"); 
         }
 
 
@@ -230,6 +243,7 @@ public class MainClass
         }
         int[,] GenerateMatrix(int n)
         {
+            var numbers = new int[] { 0, 0, 0, 0, 1, 2, 3, 1, 1, 0, 0, 0, 0 };
             var random = new Random();
             int[,] matrix = new int[n, n];
             for (int i = 0; i < n; i++)
@@ -239,7 +253,7 @@ public class MainClass
                     if (i == j) matrix[i, j] = 0;
                     else
                     {
-                        matrix[i, j] = random.Next(0, 7);
+                        matrix[i, j] = numbers[random.Next(0, numbers.Length)];
                     }
                 }
             }

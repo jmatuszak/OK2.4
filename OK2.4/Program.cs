@@ -6,16 +6,16 @@ public class MainClass
 {
     public static void Main()
     {
-        for(int i = 1; i <= 80; i++)
+        for(int i = 1; i <= 50; i++)
         {
-            var n = 10*i;
+            var n = 100;
             var matrix = GenerateMatrix(n);
             int[,] matrixCopy = matrix.Clone() as int[,];
 
-            DateTime start = DateTime.Now;
-            DateTime end = DateTime.Now;
+            DateTime start;
+            DateTime end;
             //TimeSpan ts = (end - start);
-            Console.WriteLine("\n-----------------------------------------");
+            //Console.WriteLine("\n-----------------------------------------");
 
             //Weighted
             start = DateTime.Now;
@@ -32,9 +32,10 @@ public class MainClass
 
 
             Console.Write(n + ";" + result2ApproximatedWeighteed.Count + ";");
-            Console.WriteLine(result2Approximated.Count+";");
+            Console.Write(result2Approximated.Count+";");
             Console.Write(tsWeight.TotalMilliseconds + ";");
-            Console.Write(tsNoWeight.TotalMilliseconds + ";"); 
+            Console.WriteLine(tsNoWeight.TotalMilliseconds
+                ); 
         }
 
 
